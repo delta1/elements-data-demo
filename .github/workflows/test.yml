@@ -6,7 +6,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: DeterminateSystems/nix-installer-action@main
             - run: |
-                nix develop
+                sudo apt-get update
+                sudo apt-get install jq xxd
+                wget https://github.com/ElementsProject/elements/releases/download/elements-23.2.1/elements-23.2.1-x86_64-linux-gnu.tar.gz
+                tar -avxf elements-23.2.1-x86_64-linux-gnu.tar.gz
+                sudo cp elements-23.2.1/bin/elementsd /usr/local/bin
+                sudo cp elements-23.2.1/bin/elements-cli /usr/local/bin
                 ./demo.sh
